@@ -2,11 +2,17 @@
   <div style="padding:16px">
     <h1>借还记录</h1>
     <h3>逾期</h3>
-    <div v-for="l in data.overdue" :key="'o'+l.id" class="item overdue">{{ l.title }} · {{ l.borrower }}</div>
+    <router-link v-for="l in data.overdue" :key="'o'+l.id" :to="'/loans/'+l.id" custom v-slot="{ navigate }">
+      <div class="item overdue loan-row" @click="navigate">{{ l.title }} · {{ l.borrower }} · 应还 {{ l.due_date }}</div>
+    </router-link>
     <h3>在借</h3>
-    <div v-for="l in data.active" :key="'a'+l.id" class="item">{{ l.title }} · {{ l.borrower }}</div>
+    <router-link v-for="l in data.active" :key="'a'+l.id" :to="'/loans/'+l.id" custom v-slot="{ navigate }">
+      <div class="item loan-row" @click="navigate">{{ l.title }} · {{ l.borrower }} · 应还 {{ l.due_date }}</div>
+    </router-link>
     <h3>已还</h3>
-    <div v-for="l in data.returned" :key="'r'+l.id" class="item">{{ l.title }} · {{ l.borrower }}</div>
+    <router-link v-for="l in data.returned" :key="'r'+l.id" :to="'/loans/'+l.id" custom v-slot="{ navigate }">
+      <div class="item loan-row" @click="navigate">{{ l.title }} · {{ l.borrower }} · 应还 {{ l.due_date }}</div>
+    </router-link>
   </div>
 </template>
 <script setup>

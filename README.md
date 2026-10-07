@@ -8,3 +8,17 @@
 | API | 10400 |
 
 0-1：`deposit` / `damage_note` / `neighbor_rating`。
+
+## 截止钟点
+
+- 借出时除应还日（YYYY-MM-DD）外可填截止钟点（HH:MM，可空）。钟点非法（如
+  25 点、缺分钟）整单 422 失败，不写任何数据，逾期扫名单/顶细条停在提交前。
+- 是否逾期只看一个出口 `borrow_rules.is_overdue`：无钟点按自然日；有钟点时
+  应还日当天须当前钟点**严格超过**截止钟点才算逾期——只过日未到点不逾期。
+  看板分栏、逾期扫名单、顶细条、归还结论共用同一结果。
+- 借还记录主行只显示应还日期；时分点进借阅详情（`/loans/:id`）查看。
+- 全板宽限 `PUT /api/settings/grace_days` 只在判定时加自然日，不回写 loans，
+  不清空已写钟点。
+- 顺延 `POST /api/loans/{id}/extend {"days": n, "time_policy": ...}`：
+  `follow_day` 时分跟着新日走（原无钟点仍整日）；`keep_time` 钉在原时刻
+  （原无钟点钉为 23:59）。
