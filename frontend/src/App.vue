@@ -4,6 +4,7 @@
       <span>可借 {{ counts.available || 0 }}</span>
       <span>在借 {{ counts.active || 0 }}</span>
       <span>逾期 {{ counts.overdue || 0 }}</span>
+      <span v-if="now.time" class="clock">现在 {{ now.date }} {{ now.time }}</span>
     </div>
     <nav class="topnav">
       <router-link to="/">看板</router-link>
@@ -19,10 +20,12 @@
 import { ref, onMounted, provide } from 'vue'
 import { api } from './api'
 const counts = ref({})
+const now = ref({})
 const board = ref({ available: [], active: [], overdue: [] })
 async function load() {
   board.value = await api('/board')
   counts.value = board.value.counts || {}
+  now.value = board.value.now || {}
 }
 provide('board', board)
 provide('reloadBoard', load)

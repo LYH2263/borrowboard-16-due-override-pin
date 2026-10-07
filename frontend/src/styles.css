@@ -11,6 +11,7 @@ h1,h2 { font-family: "Libre Baskerville", Georgia, serif; }
   height: 28px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 16px;
   padding: 0 16px; font-size: 12px; background: #e8d9be;
 }
+.status-bar .clock { margin-left: auto; color: #5a5045; }
 .split { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 28px); }
 @media (max-width: 720px) { .split { grid-template-columns: 1fr; } }
 .pane { padding: 16px; border-right: 1px solid var(--line); }
@@ -24,3 +25,6 @@ input { border: 1px solid var(--line); padding: 6px 8px; font: inherit; width: 1
 .topnav { display: flex; gap: 12px; padding: 8px 16px; border-bottom: 1px solid var(--line); font-size: 13px; }
 .topnav a { color: inherit; }
 .muted { color: #5a5045; font-size: 13px; }
+.item button { margin: 6px 6px 0 0; }
+.policy { width: auto; margin: 6px 0 0; padding: 5px 6px; font: inherit; }
+.err { color: #8a2f1c; font-size: 13px; margin-top: 6px; }
